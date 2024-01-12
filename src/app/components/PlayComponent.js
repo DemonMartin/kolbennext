@@ -22,21 +22,24 @@ export default function PlayComponent({
     }, [audioLevel, fluidLevel]);
 
     useEffect(() => {
-        const intervalId = setInterval(() => {
-            if (fluidLevelRef.current < 1) {
-                if (audioLevelRef.current > 15 && fluidLevelRef.current < 1) {
-                    setFluidLevel(fluidLevelRef.current + 0.01);
-                } else if (audioLevelRef.current < 10 && fluidLevelRef.current > 0) {
-                    setFluidLevel(fluidLevelRef.current - 0.01);
+        if (isRecording && started) {
+            const intervalId = setInterval(() => {
+                console.log(audioLevelRef.current, fluidLevelRef.current);
+                if (fluidLevelRef.current < 1) {
+                    if (audioLevelRef.current > 1 && fluidLevelRef.current < 1) {
+                        setFluidLevel(Math.min(fluidLevelRef.current + 0.005, 1));
+                    } else if (audioLevelRef.current < 1 && fluidLevelRef.current > 0) {
+                        setFluidLevel(Math.max(fluidLevelRef.current - 0.01, 0));
+                    }
+                } else {
+                    clearInterval(intervalId);
                 }
-            } else {
-                clearInterval(intervalId);
-                pauseRecording();
-            }
-        }, 100);
-
-        return () => clearInterval(intervalId);
-    }, []);
+            }, 200);
+        }
+    }, [
+        started,
+        isRecording,
+    ]);
 
     const startGame = (id) => {
         if (!started) {
@@ -54,7 +57,7 @@ export default function PlayComponent({
     return (
         <div>
             <TimerDisplay startTime={timer} />
-            <ImageComponent src={imgSrc} id={id} fluidLevel={fluidLevel} />
+            <ImageComponent src={imgSrc} id={id} fluidLevel={fluidLevelRef.current} />
             <div className="flex justify-center items-center">
                 <button
                     className="inline-flex items-center bg-gray-300 rounded-md px-4 py-2 text-gray-700 shadow-md hover:shadow-lg active:shadow-inner transition duration-150 mt-4"
