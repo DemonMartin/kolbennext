@@ -15,7 +15,7 @@ const ImageComponent = ({ src, id, fluidLevel = 0, audioLevel = 0, running = fal
     const fluidHeight = `${Math.max(0, Math.min(fluidLevel, 1)) * 100}%`;
 
     return (
-        <div className="flex min-h-[60vh] items-center justify-center relative rounded-3xl overflow-hidden shadow-lg border-gray-200 bg-white bg-opacity-25">
+        <div className="flex min-h-[30vh] md:min-h-[40vh] lg:min-h-[50vh] xl:min-h-[60vh] items-center justify-center relative rounded-3xl overflow-hidden shadow-lg border-gray-200 bg-white bg-opacity-25">
             {/* White background behind Water */}
             {/* <div className="z-2 absolute bottom-0 left-0 w-full h-full bg-white"></div> */}
 
@@ -31,9 +31,8 @@ const ImageComponent = ({ src, id, fluidLevel = 0, audioLevel = 0, running = fal
             </div>
 
             {/* Image */}
-
             <div className="z-3 relative">
-                <Image src={src} alt={id} width={1920} height={1080} className="object-fit w-full max-h-[60vh]" 
+                <Image src={src} alt={id} width={1920} height={1080} className="object-fit w-full max-h-[30vh] md:max-h-[40vh] lg:max-h-[50vh] xl:max-h-[60vh]" 
                 style={shakeStyle(audioLevel)}/>
             </div>
 
