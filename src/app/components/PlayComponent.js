@@ -34,9 +34,9 @@ export default function PlayComponent({
                 console.log(audioLevelRef.current, fluidLevelRef.current);
                 if (fluidLevelRef.current < 1) {
                     if (audioLevelRef.current > 12 && fluidLevelRef.current < 1) {
-                        setFluidLevel(Math.min(fluidLevelRef.current + ((audioLevelRef.current / 20000) + 0.003), 1)); // Decrease the step size
+                        setFluidLevel(Math.min(fluidLevelRef.current + ((audioLevelRef.current / 40000) + 0.003), 1)); // Decrease the step size
                     } else if (audioLevelRef.current < 10 && fluidLevelRef.current > 0) {
-                        setFluidLevel(Math.max(fluidLevelRef.current - 0.001, 0)); // Decrease the step size
+                        setFluidLevel(Math.max(fluidLevelRef.current - 0.004, 0)); // Decrease the step size
                     }
                 } else {
                     stopGame();
