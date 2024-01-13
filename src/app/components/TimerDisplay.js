@@ -26,11 +26,11 @@ const TimerDisplay = ({ startTime = 0, stop = false }) => {
 
     return (
         <div className="flex justify-center items-center">
-            <div className="text-center p-4 mb-1 bg-indigo-100 rounded-lg shadow-inner border border-indigo-300">
-                <p className="text-5xl font-bold text-indigo-700 tracking-wider">
-                    {displayTime}
-                </p>
-            </div>
+          <div className="text-center p-4 mb-4 rounded-xl shadow-lg bg-white bg-opacity-30 border border-white border-opacity-60">
+            <p className="text-4xl text-white">
+              {displayTime}
+            </p>
+          </div>
         </div>
     );
 };

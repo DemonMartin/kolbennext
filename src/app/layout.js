@@ -1,7 +1,8 @@
-import { Roboto_Mono } from 'next/font/google'
+// Import the Open Sans font from Google Fonts
+import { Open_Sans } from 'next/font/google'
 import './globals.css'
 
-const robotoMono = Roboto_Mono({ subsets: ['latin'] })
+const robotoMono = Open_Sans({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Create Next App',

@@ -13,7 +13,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-microphone-recorder": "^1.0.0",
-    "react-wavify": "^1.10.0"
+    "react-wavify": "^1.10.0",
+    "reshake": "^2.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",
