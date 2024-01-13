@@ -32,7 +32,7 @@ const ImageComponent = ({ src, id, fluidLevel = 0, audioLevel = 0, running = fal
 
             {/* Image */}
             <div className="z-3 relative">
-                <Image src={src} alt={id} width={1920} height={1080} className="object-fit w-full max-h-[30vh] md:max-h-[40vh] lg:max-h-[50vh] xl:max-h-[60vh]" 
+                <Image src={src} alt={id} width={1920} height={1080} className="object-contain w-full max-h-[30vh] md:max-h-[40vh] lg:max-h-[50vh] xl:max-h-[60vh]" 
                 style={shakeStyle(audioLevel)}/>
             </div>
 
