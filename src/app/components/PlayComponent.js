@@ -15,10 +15,11 @@ export default function PlayComponent({
 
     const audioLevelRef = useRef(audioLevel);
     const fluidLevelRef = useRef(fluidLevel);
+    const intervalIdRef = useRef(null);
 
     useEffect(() => {
-        audioLevelRef.current = audioLevel;
-        fluidLevelRef.current = fluidLevel;
+        audioLevelRef.current = Number(audioLevel.toPrecision(3));
+        fluidLevelRef.current = Number(fluidLevel.toPrecision(3));
     }, [audioLevel, fluidLevel]);
 
     const startGame = (id) => {
@@ -28,45 +29,32 @@ export default function PlayComponent({
             setStarted(true);
             startRecording();
             setFluidLevel(0);
-        } else {
-            stopGame();
-        }
-    }
-    
-    const stopGame = () => {
-        setStarted(false);
-        stopRecording();
-    }
-    
-    useEffect(() => {
-        let intervalId;
-    
-        if (isRecording && started) {
-            intervalId = setInterval(() => {
+
+            intervalIdRef.current = setInterval(() => {
                 console.log(audioLevelRef.current, fluidLevelRef.current);
                 if (fluidLevelRef.current < 1) {
-                    if (audioLevelRef.current > 20 && fluidLevelRef.current < 1) {
-                        setFluidLevel(Math.min(fluidLevelRef.current + 0.0025, 1));
+                    if (audioLevelRef.current > 12 && fluidLevelRef.current < 1) {
+                        setFluidLevel(Math.min(fluidLevelRef.current + ((audioLevelRef.current / 20000) + 0.003), 1)); // Decrease the step size
                     } else if (audioLevelRef.current < 10 && fluidLevelRef.current > 0) {
-                        setFluidLevel(Math.max(fluidLevelRef.current - 0.01, 0));
+                        setFluidLevel(Math.max(fluidLevelRef.current - 0.001, 0)); // Decrease the step size
                     }
                 } else {
                     stopGame();
                 }
-            }, 50);
+            }, 100); // Increase the update frequency
+        } else {
+            stopGame();
         }
-    
-        return () => {
-            if (intervalId) {
-                clearInterval(intervalId);
-            }
-        }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [
-        started,
-        isRecording,
-    ]);
+    }
 
+    const stopGame = () => {
+        setStarted(false);
+        stopRecording();
+        if (intervalIdRef.current) {
+            clearInterval(intervalIdRef.current);
+            intervalIdRef.current = null;
+        }
+    }
 
     return (
         <div className="relative p-6 rounded-3xl shadow-xl transition-shadow duration-300 hover:shadow-2xl border border-gray-200 bg-white bg-opacity-25">
