@@ -57,12 +57,12 @@ export default function PlayComponent({
     }
 
     return (
-        <div className="relative p-6 rounded-3xl shadow-xl transition-shadow duration-300 hover:shadow-2xl border border-gray-200 bg-white bg-opacity-25 md:p-8 lg:p-10 xl:p-12">
-            <TimerDisplay startTime={timer} stop={!started} className="text-lg font-semibold mb-6 text-blue-800 md:text-xl lg:text-2xl xl:text-3xl" />
-            <ImageComponent src={imgSrc} id={id} fluidLevel={fluidLevelRef.current} audioLevel={audioLevel} running={started} className="mb-6" />
-            <div className="flex justify-center items-center">
+        <div className={`relative p-4 md:p-6 rounded-3xl shadow-xl transition-shadow duration-300 border border-gray-200 bg-white bg-opacity-25 text-white ${started ? "shadow-2xl" : ""}`}>
+            <TimerDisplay startTime={timer} stop={!started} className="text-lg md:text-xl lg:text-2xl xl:text-3xl mb-4 font-semibold text-blue-800" />
+            <ImageComponent src={imgSrc} id={id} fluidLevel={fluidLevelRef.current} audioLevel={audioLevel} running={started} />
+            <div className="flex justify-center items-center mt-4">
                 <button
-                    className={`inline-flex items-center ${started ? 'bg-red-500 hover:bg-red-700' : 'bg-blue-500 hover:bg-blue-700'} text-white text-lg font-bold rounded-full px-8 py-3 shadow transition duration-150 ease-in-out mt-4 hover:-translate-y-1 active:translate-y-1 md:text-xl lg:text-2xl xl:text-3xl md:px-10 lg:px-12 xl:px-14 md:py-4 lg:py-5 xl:py-6`}
+                    className={`inline-flex items-center ${started ? 'bg-red-500 hover:bg-red-700' : 'bg-blue-500 hover:bg-blue-700'} text-xs sm:text-sm md:text-lg lg:text-xl xl:text-3xl font-bold rounded-full px-2 sm:px-3 md:px-6 lg:px-8 py-1 sm:py-2 md:py-3 shadow transition duration-150 ease-in-out hover:-translate-y-1 active:translate-y-1`}
                     onClick={() => startGame(id)}
                 >
                     {started ? 'Pause' : 'Start'}
