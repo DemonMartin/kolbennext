@@ -1,8 +1,9 @@
 "use client";
 import { useState, useEffect } from 'react';
 
-const TimerDisplay = ({ startTime = 0 }) => {
+const TimerDisplay = ({ startTime = 0, stop = false }) => {
     const [displayTime, setDisplayTime] = useState('00:00:00');
+    const [intervalId, setIntervalId] = useState(null);
 
     useEffect(() => {
         if (!(startTime instanceof Date)) {
@@ -10,7 +11,7 @@ const TimerDisplay = ({ startTime = 0 }) => {
             return;
         }
 
-        const intervalId = setInterval(() => {
+        const id = setInterval(() => {
             const now = new Date();
             const time = Math.floor((now - startTime) / 1000);
 
@@ -27,12 +28,20 @@ const TimerDisplay = ({ startTime = 0 }) => {
             setDisplayTime(formattedTime);
         }, 1000);
 
-        return () => clearInterval(intervalId);
+        setIntervalId(id);
+
+        return () => clearInterval(id);
     }, [startTime]);
 
+    useEffect(() => {
+        if (stop && intervalId) {
+            clearInterval(intervalId);
+        }
+    }, [stop, intervalId]);
+
     return (
-        <div className="flex min-h-[20vh] max-h-[20vh] justify-center">
-            <p className="pt-[5vh] text-[5vh]">
+        <div className="flex min-h-[10vh] max-h-[10vh] justify-center">
+            <p className="pt-[2vh] text-[6vh]">
                 {displayTime}
             </p>
         </div>
