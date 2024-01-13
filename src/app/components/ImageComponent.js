@@ -1,6 +1,16 @@
 import Image from "next/image";
 import styles from '../styles/ImageComponent.module.css'; // Assume you have CSS module for custom styles
 
+function shakeStyle(audioLevel) {
+    // generate higher values for higher audio levels [AudioLevel = 0 - 100]
+    const shake = audioLevel * 0.1;
+    const randomFactorX = Math.random() * 2 - 1; // generates a random number between -1 and 1
+    const randomFactorY = Math.random() * 2 - 1; // generates a random number between -1 and 1
+    const shakeWithRandomnessX = shake * randomFactorX;
+    const shakeWithRandomnessY = shake * randomFactorY;
+    return { transform: `translate(${shakeWithRandomnessX}px, ${shakeWithRandomnessY}px)` };
+}
+
 const ImageComponent = ({ src, id, fluidLevel = 0, audioLevel = 0, running = false }) => {
     const fluidHeight = `${Math.max(0, Math.min(fluidLevel, 1)) * 100}%`;
 
@@ -23,7 +33,8 @@ const ImageComponent = ({ src, id, fluidLevel = 0, audioLevel = 0, running = fal
             {/* Image */}
 
             <div className="z-3 relative">
-                <Image src={src} alt={id} width={1920} height={1080} className="object-fit w-full max-h-[60vh]" />
+                <Image src={src} alt={id} width={1920} height={1080} className="object-fit w-full max-h-[60vh]" 
+                style={shakeStyle(audioLevel)}/>
             </div>
 
         </div>
