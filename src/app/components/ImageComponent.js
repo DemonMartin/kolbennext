@@ -25,7 +25,7 @@ const ImageComponent = ({ src, id, fluidLevel = 0, audioLevel = 0, running = fal
                     height: fluidHeight,
                 }}
             >
-                <div className={`absolute bottom-0 left-0 w-full h-full ${styles.waterGradient}`}>
+                <div className={`absolute bottom-0 left-0 w-full h-full ${id != "pipetta" ? styles.waterGradient : styles.waterGradientRed}`}>
 
                 </div>
             </div>
