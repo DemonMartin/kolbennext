@@ -35,8 +35,8 @@ export default function PlayComponent({
                 console.log(audioLevelRef.current, fluidLevelRef.current);
                 if (fluidLevelRef.current < 1) {
                     setTotalAudioLevel(prevLevels => [...prevLevels, audioLevelRef.current]);
-                    if (audioLevelRef.current > 13 && fluidLevelRef.current < 1) {
-                        const addFluidLevel = (audioLevelRef.current / 38000) + 0.009;
+                    if (audioLevelRef.current > 15 && fluidLevelRef.current < 1) {
+                        const addFluidLevel = (audioLevelRef.current / 40000) + 0.009;
                         console.log(addFluidLevel);
                         setFluidLevel(Math.min(fluidLevelRef.current + addFluidLevel, 1)); // Decrease the step size
                     } else if (audioLevelRef.current < 10 && fluidLevelRef.current > 0) {
